@@ -22,7 +22,7 @@ public class Red_Black_Tree {
         char[] idArr = new char[] { 'f', 'c', 'l', 'a', 'e', 'h', 'n', 'b', 'd', 'g', 'j', 'm', 'o', 'i', 'k' };
         int[] arr = new int[] { 40, 20, 100, 10, 30, 60, 120, 15, 25, 50, 80, 110, 130, 70, 90 };
         char[] colors = new char[] { 'B', 'B', 'R', 'B', 'B', 'B', 'B', 'R', 'R', 'B', 'B', 'B', 'B', 'R', 'R' };
-        
+
         RedBlackTree tree = new RedBlackTree(idArr, arr, colors);
         System.out.println();
 
@@ -30,8 +30,8 @@ public class Red_Black_Tree {
             1. to insert a node ---> tree.insert('p', 12);
             2. to delete a node ---> tree.delete(40);
             3. to print a single node ---> tree.printNode('g');
-            4. to print all nodes ---> tree.printAllNodes('g');
-            5. to print tree ---> tree.printTree('g');
+            4. to print all nodes ---> tree.printAllNodes();
+            5. to print tree ---> tree.printTree();
         */
 
         // write commands here
