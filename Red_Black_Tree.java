@@ -29,14 +29,16 @@ public class Red_Black_Tree {
         /*
             1. to insert a node ---> tree.insert('p', 12);
             2. to delete a node ---> tree.delete(40);
-            3. to print a single node ---> tree.printNode('g');
-            4. to print all nodes ---> tree.printAllNodes();
-            5. to print tree ---> tree.printTree();
+            3. to print successor ---> tree.successor('g');
+            4. to print predecessor ---> tree.predecessor('g')
+            5. to print a single node ---> tree.printNode('g');
+            6. to print all nodes ---> tree.printAllNodes();
+            7. to print tree ---> tree.printTree();
         */
 
         // write commands here
 
-        // tree.insert('p', 12);
+        tree.insert('p', 12);
 
         tree.delete(40);
         tree.printNode('g');
@@ -44,6 +46,7 @@ public class Red_Black_Tree {
         tree.printNode('j');
         tree.printNode('h');
 
+        // tree.printTree();
     }
 }
 
@@ -62,7 +65,7 @@ class RedBlackTree {
             color = 'B';
         }
 
-        // parametertized constructor
+        // parameterized constructor
         Node(char id, int key, char color) {
             this.id = id;
             this.key = key;
@@ -222,6 +225,11 @@ class RedBlackTree {
 
     private void delete(Node z) {
         //successor(z.id);
+
+        if (z == root) {
+            violations += "Property 2 ";
+        }
+
         Node x;
         Node y = z;
         char yOriginalColor = y.color;
@@ -232,7 +240,6 @@ class RedBlackTree {
             x = z.left;
             transplant(z, z.left);
         } else {
-            violations += "Case 2 ";
             y = minimum(z.right);
             yOriginalColor = y.color;
             x = y.right;
@@ -248,9 +255,9 @@ class RedBlackTree {
             y.left.p = y;
             y.color = z.color;
         }
+
         if (yOriginalColor == 'B') {
             deleteFixup(x);
-            System.out.println(x.id);
         }
     }
 
@@ -261,7 +268,7 @@ class RedBlackTree {
                 w = x.p.right;
                 if (w.color == 'R') {
                     // case 1
-                    violations += "case 1 ";
+                    violations += "Case 1 ";
                     w.color = 'B';
                     x.p.color = 'R';
                     leftRotate(x.p);
@@ -270,20 +277,20 @@ class RedBlackTree {
 
                 if (w.left.color == 'B' && w.right.color == 'B') {
                     // case 2
-                    violations += "case 2 ";
+                    violations += "Case 2 ";
                     w.color = 'R';
                     x = x.p;
                 } else {
                     if (w.right.color == 'B') {
                         // case 3
-                        violations += "case 3 ";
+                        violations += "Case 3 ";
                         w.left.color = 'B';
                         w.color = 'R';
                         rightRotate(w);
                         w = x.p.right;
                     }
                     // case 4
-                    violations += "case 4 ";
+                    violations += "Case 4 ";
                     w.color = x.p.color;
                     x.p.color = 'B';
                     w.right.color = 'B';
@@ -294,7 +301,7 @@ class RedBlackTree {
                 w = x.p.left;
                 if (w.color == 'R') {
                     // case 1
-                    violations += "case 1 ";
+                    violations += "Case 1 ";
                     w.color = 'B';
                     x.p.color = 'R';
                     rightRotate(x.p);
@@ -302,20 +309,20 @@ class RedBlackTree {
                 }
                 if (w.right.color == 'B' && w.left.color == 'B') {
                     // case 2
-                    violations += "case 2 ";
+                    violations += "Case 2 ";
                     w.color = 'R';
                     x = x.p;
                 } else {
                     if (w.left.color == 'B') {
                         // case 3
-                        violations += "case 3 ";
+                        violations += "Case 3 ";
                         w.right.color = 'B';
                         w.color = 'R';
                         leftRotate(w);
                         w = x.p.left;
                     }
                     // case 4
-                    violations += "case 4 ";
+                    violations += "Case 4 ";
                     w.color = x.p.color;
                     x.p.color = 'B';
                     w.left.color = 'B';
@@ -407,6 +414,50 @@ class RedBlackTree {
         return x;
     }
 
+    public void predecessor(char id) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        Node node = queue.poll();
+
+        // search for the node with the id
+        while (node != null && node.id != id) {
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+            node = queue.poll();
+        }
+
+        System.out.println("Predecessor --->");
+
+        if (node != null) {
+            printNode(predecessor(node).id);
+        } else {
+            System.out.println("id not found\n");
+        }
+    }
+
+    private Node predecessor(Node x) {
+        // predecessor is the rightmost node in the left subtree
+        // if left subtree isn't null
+        if (x.left != nil) {
+            return maximum(x.left);
+        }
+
+        Node y = x.p;
+        while (y != nil && x == y.left) {
+            x = y;
+            y = y.p;
+        }
+
+        // return largest node of x's left subtree
+        return y;
+    }
+
     public void successor(char id) {
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
@@ -425,7 +476,14 @@ class RedBlackTree {
             node = queue.poll();
         }
 
-        printNode(successor(node).id);
+        System.out.println("Successor --->");
+
+        if (node != null) {
+            printNode(successor(node).id);
+        } else {
+            System.out.println("id not found\n");
+        }
+
     }
 
     private Node successor(Node x) {
@@ -438,6 +496,7 @@ class RedBlackTree {
             x = y;
             y = y.p;
         }
+        // return smallest node of x's right subtree
         return y;
     }
 
@@ -585,7 +644,8 @@ class RedBlackTree {
             }
 
             String sColor = root.color == 'R' ? "RED" : "BLACK";
-            System.out.println(root.key + "(" + sColor + ")");
+            System.out.println(root.key + " " + root.id + " (" + sColor + ")");
+            //System.out.println(root.key + "(" + sColor + ")");
             printTree(root.left, indent, false);
             printTree(root.right, indent, true);
         }
