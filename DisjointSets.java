@@ -5,7 +5,7 @@ public class DisjointSets {
 
     public static void main(String[] args) {
 
-        // chage to false if you want to use find without path compression
+        // change to false if you want to find without path compression
         findWithPathCompression = true;
 
         A = new int[] { 0,
