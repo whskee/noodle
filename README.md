@@ -11,3 +11,9 @@ _no known issues_
 
 ## 4. Red Black Trees
 _need to print out cases violated_
+
+## 5. Hashing with Open Addressing
+_no known issues_
+
+## 6. Hash value using multiplication method
+_no known issues_
