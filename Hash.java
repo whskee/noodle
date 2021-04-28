@@ -15,7 +15,9 @@ public class Hash {
         System.out.println();
         printLoadFactor();
 
+        // write code here
         hashInsert(25);
+        
         printHashTable();
     }
 
