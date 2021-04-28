@@ -83,7 +83,7 @@ public class Hash {
     static void printLoadFactor() {
         int n = 0;
         for (int i = 0; i < T.length; i++) {
-            if (T[i] == "del") {
+            if (T[i] == "del" || T == null) {
                 n++;
             }
         }
