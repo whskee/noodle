@@ -38,15 +38,13 @@ public class Red_Black_Tree {
 
         // write commands here
 
-        tree.insert('p', 12);
-
         tree.delete(40);
-        tree.printNode('g');
-        tree.printNode('l');
-        tree.printNode('j');
-        tree.printNode('h');
+        // tree.printNode('g');
+        // tree.printNode('l');
+        // tree.printNode('j');
+        // tree.printNode('h');
 
-        // tree.printTree();
+        //tree.printTree();
     }
 }
 
@@ -219,15 +217,21 @@ class RedBlackTree {
             return;
         }
         delete(x);
-        // need to fix
-        //printViolations();
+
+        printViolations();
+        System.out.println();
     }
 
     private void delete(Node z) {
-        //successor(z.id);
 
-        if (z == root) {
-            violations += "Property 2 ";
+        // if we are deleting a black node whose parent is red and its successor is a red node
+        if (z.p.color == 'R' && successor(z).color == 'R') {
+            violations += "Property 4 ";
+        }
+
+        // if we are deleting a black node which is not the root
+        if (z != root && z.color == 'B') {
+            violations += "Property 5 ";
         }
 
         Node x;
@@ -256,6 +260,11 @@ class RedBlackTree {
             y.color = z.color;
         }
 
+        // the root is not black
+        if (root.color == 'R') {
+            violations += "Property 2 ";
+        }
+
         if (yOriginalColor == 'B') {
             deleteFixup(x);
         }
@@ -268,7 +277,7 @@ class RedBlackTree {
                 w = x.p.right;
                 if (w.color == 'R') {
                     // case 1
-                    violations += "Case 1 ";
+                    //violations += "Case 1 ";
                     w.color = 'B';
                     x.p.color = 'R';
                     leftRotate(x.p);
@@ -277,20 +286,20 @@ class RedBlackTree {
 
                 if (w.left.color == 'B' && w.right.color == 'B') {
                     // case 2
-                    violations += "Case 2 ";
+                    //violations += "Case 2 ";
                     w.color = 'R';
                     x = x.p;
                 } else {
                     if (w.right.color == 'B') {
                         // case 3
-                        violations += "Case 3 ";
+                        //violations += "Case 3 ";
                         w.left.color = 'B';
                         w.color = 'R';
                         rightRotate(w);
                         w = x.p.right;
                     }
                     // case 4
-                    violations += "Case 4 ";
+                    //violations += "Case 4 ";
                     w.color = x.p.color;
                     x.p.color = 'B';
                     w.right.color = 'B';
@@ -301,7 +310,7 @@ class RedBlackTree {
                 w = x.p.left;
                 if (w.color == 'R') {
                     // case 1
-                    violations += "Case 1 ";
+                    //violations += "Case 1 ";
                     w.color = 'B';
                     x.p.color = 'R';
                     rightRotate(x.p);
@@ -309,20 +318,20 @@ class RedBlackTree {
                 }
                 if (w.right.color == 'B' && w.left.color == 'B') {
                     // case 2
-                    violations += "Case 2 ";
+                    //violations += "Case 2 ";
                     w.color = 'R';
                     x = x.p;
                 } else {
                     if (w.left.color == 'B') {
                         // case 3
-                        violations += "Case 3 ";
+                        //violations += "Case 3 ";
                         w.right.color = 'B';
                         w.color = 'R';
                         leftRotate(w);
                         w = x.p.left;
                     }
                     // case 4
-                    violations += "Case 4 ";
+                    //violations += "Case 4 ";
                     w.color = x.p.color;
                     x.p.color = 'B';
                     w.left.color = 'B';
