@@ -16,8 +16,8 @@ public class Hash {
         printLoadFactor();
 
         // write code here
-        hashInsert(25);
-        
+        hashDelete(8);
+
         printHashTable();
     }
 
@@ -42,12 +42,17 @@ public class Hash {
             if (print) {
                 System.out.print(j + " ");
             }
-            if (T[j] == "del" || Integer.parseInt(T[j]) == k) {
+
+            if (T[j] == "del") {
+                i++;
+                continue;
+            }
+
+            if (Integer.parseInt(T[j]) == k) {
 
                 System.out.println();
                 return j;
             }
-
             i++;
         } while (T[j] != null || i != m);
         return -1;
