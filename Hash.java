@@ -10,13 +10,14 @@ public class Hash {
             1. to enter null into the hash table, simply enter null, not "null"
             2. modify both hash functions according to specifications
         */
-        T = new String[] { "10", "del", "9", "del", "del", "8", "7", "6", "5", "4", "3", "2", "1" };
+        T = new String[] { "13", "14", "del", "15", null, "5", "del", "19", null, "9", "23", "24", "25" };
         m = T.length;
         System.out.println();
-        printLoadFactor();
+
+        printHashTable();
 
         // write code here
-        hashDelete(8);
+        hashSearch(18, true);
 
         printHashTable();
     }
@@ -43,7 +44,7 @@ public class Hash {
                 System.out.print(j + " ");
             }
 
-            if (T[j] == "del") {
+            if (T[j] == "del" || T[j] == null) {
                 i++;
                 continue;
             }
@@ -54,6 +55,7 @@ public class Hash {
             }
             i++;
         } while (T[j] != null || i != m);
+        System.out.println();
         return -1;
     }
 
