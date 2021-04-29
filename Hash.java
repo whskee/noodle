@@ -49,7 +49,6 @@ public class Hash {
             }
 
             if (Integer.parseInt(T[j]) == k) {
-
                 System.out.println();
                 return j;
             }
