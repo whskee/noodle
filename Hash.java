@@ -10,7 +10,7 @@ public class Hash {
             1. to enter null into the hash table, simply enter null, not "null"
             2. modify both hash functions according to specifications
         */
-        T = new String[] { "13", "14", "del", "15", null, "5", "del", "19", null, "9", "23", "24", "25" };
+        T = new String[] { "10", "del", "9", "del", "del", "8", "7", "6", "5", "4", "3", "2", "1" };
         m = T.length;
         System.out.println();
 
