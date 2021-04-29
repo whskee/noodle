@@ -10,7 +10,7 @@ _no known issues_
 _no known issues_
 
 ## 4. Red Black Trees
-_need to print out cases violated_
+_no known issues_ (but let me know if there are any)
 
 ## 5. Hashing with Open Addressing
 _no known issues_
